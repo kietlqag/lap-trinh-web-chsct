@@ -115,6 +115,20 @@ public class Book {
 			this.long_description = long_description;
 		}
 		
-		
+		@Override
+	    public String toString() {
+	        return "Book{" +
+	               "id=" + id +
+	               ", title='" + title + '\'' +
+	               ", author='" + author + '\'' +
+	               ", imageUrl='" + imageUrl + '\'' +
+	               ", discountPercentage=" + discountPercentage +
+	               ", rating=" + rating +
+	               ", stock=" + stock +
+	               ", category='" + category + '\'' +
+	               ", price=" + price +
+	               ", long_description='" + long_description + '\'' +
+	               '}';
+	    }
 }
 

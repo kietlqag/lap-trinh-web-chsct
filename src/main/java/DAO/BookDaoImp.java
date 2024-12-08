@@ -103,4 +103,109 @@ public class BookDaoImp implements IBookDao{
 	    return reviews;
 	}
 
+	@Override
+	public List<Book> searchBook(String searchname) {
+		List<Book> books = new ArrayList<>();
+        String query = "SELECT * FROM book WHERE title LIKE ? OR author LIKE ?";
+        try (PreparedStatement statement = DBConnect.getConnection().prepareStatement(query)) {
+            statement.setString(1, "%" + searchname + "%");
+            statement.setString(2, "%" + searchname + "%");
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                Book book = new Book(
+                    resultSet.getInt("id"),
+                    resultSet.getString("title"),
+                    resultSet.getString("author"),
+                    resultSet.getString("image_url"),
+                    resultSet.getInt("discount_percentage"),
+                    resultSet.getInt("rating"),
+                    resultSet.getInt("stock"),
+                    resultSet.getString("category"),
+                    resultSet.getDouble("price"),
+                    resultSet.getString("long_description")
+                );
+                books.add(book);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return books;
+	}
+
+	@Override
+	public List<Book> searchBookByCategory(String catename) {
+		List<Book> books = new ArrayList<>();
+        String query = "SELECT * FROM book WHERE category = ?";
+        try (PreparedStatement statement = DBConnect.getConnection().prepareStatement(query)) {
+            statement.setString(1, catename);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                Book book = new Book(
+                    resultSet.getInt("id"),
+                    resultSet.getString("title"),
+                    resultSet.getString("author"),
+                    resultSet.getString("image_url"),
+                    resultSet.getInt("discount_percentage"),
+                    resultSet.getInt("rating"),
+                    resultSet.getInt("stock"),
+                    resultSet.getString("category"),
+                    resultSet.getDouble("price"),
+                    resultSet.getString("long_description")
+                );
+                books.add(book);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return books;
+	}
+
+	@Override
+	public List<Book> Pagination(int offset, int limit) {
+		List<Book> books = new ArrayList<>();
+        String query = "SELECT * FROM book LIMIT ? OFFSET ?";
+        try (Connection conn = DBConnect.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setInt(1, limit); 
+            stmt.setInt(2, offset);
+
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                Book book = new Book(
+                    rs.getInt("id"),
+                    rs.getString("title"),
+                    rs.getString("author"),
+                    rs.getString("image_url"),
+                    rs.getInt("discount_percentage"),
+                    rs.getInt("rating"),
+                    rs.getInt("stock"),
+                    rs.getString("category"),
+                    rs.getDouble("price"),
+                    rs.getString("long_description")
+                );
+                books.add(book);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return books;
+	}
+	
+    public int countBooks() {
+    	String query = "SELECT COUNT(*) FROM book";
+        try (Connection conn = DBConnect.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1); 
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return 0;
+    }
+
 }

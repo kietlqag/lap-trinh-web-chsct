@@ -66,9 +66,12 @@
 	          <div class="element-header">
 	            <h1 class="product-title fs-4" style="text-align: justify;">${book.title}</h1>
 	            <div class="product-price d-flex align-items-center mt-2">
-	              <span class="fs-2 fw-light text-primary me-2">${discountedPrice}đ</span>
-	              <del>${price}đ</del>
-	            </div>
+				    <span class="fs-2 fw-light text-primary me-2">${discountedPrice}đ</span>
+				    <c:if test="${discountedPrice != price}">
+				        <del>${price}đ</del>
+				    </c:if>
+				</div>
+
 	            <div class="rating text-warning d-flex align-items-center mb-2">
 	              <c:forEach var="i" begin="1" end="${book.rating}">
 	                <svg class="star star-fill">

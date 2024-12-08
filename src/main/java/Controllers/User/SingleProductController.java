@@ -1,4 +1,4 @@
-package Controllers;
+package Controllers.User;
 
 import java.io.IOException;
 import java.text.DecimalFormat;

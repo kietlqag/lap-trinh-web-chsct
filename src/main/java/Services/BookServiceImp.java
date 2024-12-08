@@ -25,4 +25,24 @@ public class BookServiceImp implements IBookService{
 	public List<Review> listReviewByBookid(int id) {
 		return bookDao.findByBookId(id);
 	}
+
+	@Override
+	public List<Book> searchBook(String searchname) {
+		return bookDao.searchBook(searchname);
+	}
+
+	@Override
+	public List<Book> searchBookByCategory(String catename) {
+		return bookDao.searchBookByCategory(catename);
+	}
+
+	@Override
+	public List<Book> Pagination(int offset, int limit) {
+		return bookDao.Pagination(offset, limit);
+	}
+
+	@Override
+	public int countBooks() {
+		return bookDao.countBooks();
+	}
 }

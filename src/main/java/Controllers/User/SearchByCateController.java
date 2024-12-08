@@ -1,4 +1,4 @@
-package Controllers;
+package Controllers.User;
 
 import java.io.IOException;
 import java.util.List;
@@ -12,8 +12,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet("/User/Books")
-public class ListBookController extends HttpServlet{
+@WebServlet("/User/Search/Cate")
+public class SearchByCateController extends HttpServlet{
 
 	private static final long serialVersionUID = 1L;
 	
@@ -21,7 +21,8 @@ public class ListBookController extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		List<Book> books = service.listBook();
+		String catename = req.getParameter("categoryName");
+		List<Book> books = service.searchBookByCategory(catename);
         req.setAttribute("books", books);
         req.getRequestDispatcher("/bootstrap5/shop.jsp").forward(req, resp);
 	}
