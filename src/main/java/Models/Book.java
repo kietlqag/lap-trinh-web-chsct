@@ -10,12 +10,12 @@ public class Book {
 	    private int rating;
 	    private int stock;
 	    private String category;
-	    private double price;
+	    private int price;
 	    private String long_description;
 	    
 		
 	    public Book(int id, String title, String author, String imageUrl, int discountPercentage, int rating,
-				int stock, String category, double price, String long_description) {
+				int stock, String category, int price, String long_description) {
 			super();
 			this.id = id;
 			this.title = title;
@@ -103,7 +103,7 @@ public class Book {
 			return price;
 		}
 
-		public void setPrice(double price) {
+		public void setPrice(int price) {
 			this.price = price;
 		}
 

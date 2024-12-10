@@ -71,6 +71,7 @@
                         <ul id="navbar" class="navbar-nav text-uppercase justify-content-start justify-content-lg-center align-items-start align-items-lg-center flex-grow-1">
                             <li class="nav-item"><a class="nav-link me-4" href="${pageContext.request.contextPath}/User/Home">TRANG CHỦ</a></li>
                             <li class="nav-item"><a class="nav-link me-4" href="${pageContext.request.contextPath}/User/Books">KỆ SÁCH</a></li>
+                            <li class="nav-item"><a class="nav-link me-4" href="${pageContext.request.contextPath}/User/ListOrder">THEO DÕI ĐƠN HÀNG</a></li>
                             <li class="nav-item"><a class="nav-link me-4" href="${pageContext.request.contextPath}/bootstrap5/blog.jsp">BẢN TIN</a></li>
                             <li class="nav-item"><a class="nav-link me-4" href="${pageContext.request.contextPath}/bootstrap5/contact.jsp">LIÊN HỆ</a></li>
                         </ul>

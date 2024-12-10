@@ -31,7 +31,7 @@ public class BookDaoImp implements IBookDao{
 	                    rs.getInt("rating"),
 	                    rs.getInt("stock"),
 	                    rs.getString("category"),
-	                    rs.getDouble("price"),
+	                    rs.getInt("price"),
 	                    rs.getString("long_description")
 	            );
 	            books.add(book); 
@@ -61,7 +61,7 @@ public class BookDaoImp implements IBookDao{
 	                rs.getInt("rating"),
 	                rs.getInt("stock"),
 	                rs.getString("category"),
-	                rs.getDouble("price"),
+	                rs.getInt("price"),
 	                rs.getString("long_description")
 	            );
 	        }
@@ -120,7 +120,7 @@ public class BookDaoImp implements IBookDao{
                     resultSet.getInt("rating"),
                     resultSet.getInt("stock"),
                     resultSet.getString("category"),
-                    resultSet.getDouble("price"),
+                    resultSet.getInt("price"),
                     resultSet.getString("long_description")
                 );
                 books.add(book);
@@ -148,7 +148,7 @@ public class BookDaoImp implements IBookDao{
                     resultSet.getInt("rating"),
                     resultSet.getInt("stock"),
                     resultSet.getString("category"),
-                    resultSet.getDouble("price"),
+                    resultSet.getInt("price"),
                     resultSet.getString("long_description")
                 );
                 books.add(book);
@@ -179,7 +179,7 @@ public class BookDaoImp implements IBookDao{
                     rs.getInt("rating"),
                     rs.getInt("stock"),
                     rs.getString("category"),
-                    rs.getDouble("price"),
+                    rs.getInt("price"),
                     rs.getString("long_description")
                 );
                 books.add(book);
@@ -206,5 +206,116 @@ public class BookDaoImp implements IBookDao{
 
         return 0;
     }
+
+    @Override
+	public void delete(int id) {
+	    String sql = "DELETE FROM book WHERE id = ?";
+
+	    try (PreparedStatement preparedStatement = DBConnect.getConnection().prepareStatement(sql)) {
+	        preparedStatement.setInt(1, id);
+
+	        int rowsAffected = preparedStatement.executeUpdate();
+	        if (rowsAffected > 0) {
+	            System.out.println("Deleted successfully: Book with ID = " + id);
+	        } else {
+	            System.out.println("No book found with ID = " + id);
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	}
+
+	@Override
+	public void insert(String title, String author, String image_url, int discount_percentage, int stock,
+			String category, int price, String long_description) {
+		String sql = "INSERT INTO book (title, author, image_url, discount_percentage, stock, category, price, long_description) "
+				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+
+		try (PreparedStatement preparedStatement = DBConnect.getConnection().prepareStatement(sql)) {
+			preparedStatement.setString(1, title);
+			preparedStatement.setString(2, author);
+			preparedStatement.setString(3, image_url);
+			preparedStatement.setInt(4, discount_percentage);
+			preparedStatement.setInt(5, stock);
+			preparedStatement.setString(6, category);
+			preparedStatement.setInt(7, price);
+			preparedStatement.setString(8, long_description);
+			preparedStatement.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+
+	@Override
+	public boolean checkExistBookByTitle(String title) {
+		 String sql = "SELECT COUNT(*) FROM book WHERE title = ?";
+	        
+	        try (PreparedStatement preparedStatement = DBConnect.getConnection().prepareStatement(sql)) {
+	        	
+	            preparedStatement.setString(1, title);
+	            
+	            ResultSet resultSet = preparedStatement.executeQuery();
+	            
+	            if (resultSet.next()) {
+	                int count = resultSet.getInt(1); 
+	                return count > 0;
+	            }
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	        return false;
+	}
+
+
+    public void update(int id, String title, String author, String imageUrl, int discountPercentage, int stock,
+                          String category, int price, String longDescription) {
+    	String sql = "UPDATE book SET title = ?, author = ?, image_url = ?, discount_percentage = ?, stock = ?, category = ?, price = ?, long_description = ? WHERE id = ?";
+    	
+    	try (PreparedStatement ps = DBConnect.getConnection().prepareStatement(sql)) {
+    		ps.setString(1, title);  // Thay giá trị `title` từ input
+    		ps.setString(2, author);  // Thay giá trị `author`
+    		ps.setString(3, imageUrl);  // Thay giá trị `image_url`
+    		ps.setInt(4, discountPercentage);  // Thay giá trị `discountPercentage`
+    		ps.setInt(5, stock);  // Thay giá trị `stock`
+    		ps.setString(6, category);  // Thay giá trị `category`
+    		ps.setInt(7, price);  // Thay giá trị `price`
+    		ps.setString(8, longDescription);  // Thay giá trị `long_description`
+    		ps.setInt(9, id);  // Thay giá trị `id` để xác định bản ghi cần cập nhật
+    		ps.executeUpdate();}
+            catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public boolean isDataUpdated(int id, String title, String author, String imageUrl, 
+            int discountPercentage, int stock, String category, 
+            int price, String longDescription) {
+			String sql = "SELECT COUNT(*) AS count " +
+			"FROM books " +
+			"WHERE id = ? AND title = ? AND author = ? AND image_url = ? " +
+			"AND discountPercentage = ? AND stock = ? AND category = ? " +
+			"AND price = ? AND long_description = ?";
+			try (Connection connection = DBConnect.getConnection();
+			PreparedStatement ps = connection.prepareStatement(sql)) {
+			ps.setInt(1, id);
+			ps.setString(2, title);
+			ps.setString(3, author);
+			ps.setString(4, imageUrl);
+			ps.setInt(5, discountPercentage);
+			ps.setInt(6, stock);
+			ps.setString(7, category);
+			ps.setInt(8, price);
+			ps.setString(9, longDescription);
+			
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+			int count = rs.getInt("count");
+			return count > 0; // Nếu count > 0, bản ghi mới đã tồn tại
+			}
+			} catch (Exception e) {
+			e.printStackTrace();
+			}
+			return false; // Trả về false nếu xảy ra lỗi
+			}
 
 }

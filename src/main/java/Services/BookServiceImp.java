@@ -45,4 +45,35 @@ public class BookServiceImp implements IBookService{
 	public int countBooks() {
 		return bookDao.countBooks();
 	}
+
+	@Override
+	public void delete(int id) {
+		bookDao.delete(id);
+	}
+
+	@Override
+	public boolean insert(String title, String author, String image_url, int discount_percentage, int stock,
+	                      String category, int price, String long_description) {
+	    if (!checkExistBookByTitle(title)) {
+	        bookDao.insert(title, author, image_url, discount_percentage, stock, category, price, long_description);
+	        return true;
+	    } else {
+	        return false;
+	    }
+	}
+
+
+
+	@Override
+	public boolean checkExistBookByTitle(String title) {
+		return bookDao.checkExistBookByTitle(title);
+	}
+
+	@Override
+	public boolean update(int id, String title, String author, String image_url, int discountPercentage, int stock,
+			String category, int price, String long_description) {
+		bookDao.update(id, title, author, image_url, discountPercentage, stock, category, price, long_description);
+		return bookDao.isDataUpdated(id, title, author, image_url, discountPercentage, stock, category, price, long_description);
+
+	}
 }

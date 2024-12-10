@@ -75,18 +75,8 @@
     <div class="success-container">
         <img src="success-icon.png" alt="Success">
         <h1>ĐẶT HÀNG THÀNH CÔNG!</h1>
-        <ul>
-            <li><span>Mã đơn hàng:</span> ${order.id}</li>
-            <li><span>Khách hàng:</span> ${order.namecustomer}</li>
-            <li><span>Email:</span> ${order.email}</li>
-            <li><span>Địa chỉ:</span> ${order.address}</li>
-            <li><span>Phương thức thanh toán:</span> ${order.methodpay}</li>
-            <li><span>Ngày đặt hàng:</span> ${order.date}</li>
-            <li><span>Trạng thái thanh toán:</span> ${order.paymentStatus}</li>
-            <li><span>Tổng tiền:</span> ${order.total}đ</li>
-        </ul>
         <div class="note">
-            Cảm ơn bạn đã đặt hàng. Chúng tôi sẽ gửi thông tin chi tiết qua email để bạn có thể theo dõi.
+            Cảm ơn bạn đã đặt hàng!!!
         </div>
         <a href="${pageContext.request.contextPath}/User/Home" class="btn">Quay lại trang chủ</a>
     </div>

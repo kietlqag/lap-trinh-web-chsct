@@ -10,6 +10,7 @@ import java.util.List;
 
 import Configs.DBConnect;
 import Models.Cart;
+import Models.DetailOrder;
 import Models.Order;
 
 @SuppressWarnings("serial")
@@ -97,7 +98,6 @@ public class OrderDaoImp extends DBConnect implements IOrderDao{
 	    try {
 			if (conn == null || conn.isClosed()) {
 			    try {
-			        // Nếu kết nối đã đóng hoặc chưa mở, mở lại kết nối
 			        conn = super.getConnection();
 			    } catch (SQLException e) {
 			        e.printStackTrace();
@@ -106,10 +106,8 @@ public class OrderDaoImp extends DBConnect implements IOrderDao{
 			    }
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -120,7 +118,6 @@ public class OrderDaoImp extends DBConnect implements IOrderDao{
 	        PreparedStatement deleteCartStmt = conn.prepareStatement(deleteCartQuery)
 	    ) {
 	        for (Cart item : cartItems) {
-	            // 1. Lấy giá sách từ bảng `book`
 	            int price = 0;
 	            getBookPriceStmt.setInt(1, item.getBookid());
 	            try (ResultSet rs = getBookPriceStmt.executeQuery()) {
@@ -132,23 +129,19 @@ public class OrderDaoImp extends DBConnect implements IOrderDao{
 	                }
 	            }
 
-	            // 2. Tính tổng tiền cho chi tiết đơn hàng
 	            int total = price * item.getQuantity();
 
-	            // 3. Cập nhật số lượng tồn kho
 	            updateStockStmt.setInt(1, item.getQuantity());
 	            updateStockStmt.setInt(2, item.getBookid());
 	            updateStockStmt.executeUpdate();
 
-	            // 4. Thêm chi tiết đơn hàng vào bảng `detailorder`
-	            insertOrderDetailsStmt.setInt(1, orderId); // Sử dụng orderId được tạo trước đó
+	            insertOrderDetailsStmt.setInt(1, orderId);
 	            insertOrderDetailsStmt.setInt(2, item.getBookid());
 	            insertOrderDetailsStmt.setInt(3, item.getQuantity());
 	            insertOrderDetailsStmt.setInt(4, total);
 	            insertOrderDetailsStmt.executeUpdate();
 	        }
 
-	        // 5. Xóa giỏ hàng của người dùng
 	        deleteCartStmt.setString(1, username);
 	        deleteCartStmt.executeUpdate();
 
@@ -158,7 +151,6 @@ public class OrderDaoImp extends DBConnect implements IOrderDao{
 	        System.err.println("Checkout failed.");
 	    } finally {
 	        try {
-	            // Đảm bảo đóng kết nối nếu không còn sử dụng (nếu không dùng connection pool)
 	            if (conn != null && !conn.isClosed()) {
 	                conn.close();
 	            }
@@ -177,7 +169,7 @@ public class OrderDaoImp extends DBConnect implements IOrderDao{
 
 	    try {
 	        conn = super.getConnection(); 
-	        ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS); // Chuẩn bị truy vấn với tùy chọn trả về khóa sinh tự động
+	        ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS); 
 
 	        
 	        ps.setString(1, order.getNamecustomer());
@@ -216,5 +208,128 @@ public class OrderDaoImp extends DBConnect implements IOrderDao{
 	    }
 	    return orderId;
 	}
+
+	@Override
+	public List<Order> listOrder() {
+		List<Order> orders = new ArrayList<>();
+		String query = "SELECT * FROM `order`";
+		
+		 try (Connection conn = DBConnect.getConnection();
+		         PreparedStatement ps = conn.prepareStatement(query);
+		         ResultSet rs = ps.executeQuery()){
+			 
+			  while (rs.next()) {
+		            Order order = new Order(
+		                rs.getInt("id"),
+		                rs.getString("namecustomer"),
+		                rs.getString("address"),
+		                rs.getString("phone"),
+		                rs.getString("email"),
+		                rs.getString("notes"),
+		                rs.getInt("subtotal"),
+		                rs.getInt("ship"),
+		                rs.getString("methodship"),
+		                rs.getString("methodpay"),
+		                rs.getString("status"),
+		                rs.getString("date")
+		            );
+		            orders.add(order);
+		        }
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+		
+		return orders;
+	}
+
+	@Override
+	public boolean updateOrderStatus(int orderId, String newStatus) {
+		String sql = "UPDATE `order` SET status = ? WHERE id = ?";
+        try (Connection conn = DBConnect.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, newStatus);
+            stmt.setInt(2, orderId);
+
+            return stmt.executeUpdate() > 0; 
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+	}
+
+	@Override
+	public List<Order> listOrderByUsername(String username) {
+		List<Order> orders = new ArrayList<>();
+	    String query = "SELECT * FROM `order` WHERE namecustomer = ?";
+	    
+	    try (Connection conn = DBConnect.getConnection();
+	         PreparedStatement ps = conn.prepareStatement(query)) {
+	        
+	        // Thiết lập tham số cho câu truy vấn
+	        ps.setString(1, username);
+	        
+	        // Thực thi câu truy vấn và lấy kết quả
+	        try (ResultSet rs = ps.executeQuery()) {
+	            while (rs.next()) {
+	                Order order = new Order(
+	                    rs.getInt("id"),
+	                    rs.getString("namecustomer"),
+	                    rs.getString("address"),
+	                    rs.getString("phone"),
+	                    rs.getString("email"),
+	                    rs.getString("notes"),
+	                    rs.getInt("subtotal"),
+	                    rs.getInt("ship"),
+	                    rs.getString("methodship"),
+	                    rs.getString("methodpay"),
+	                    rs.getString("status"),
+	                    rs.getString("date")
+	                );
+	                orders.add(order);
+	            }
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	    
+	    return orders;
+	}
+
+	@Override
+	public List<DetailOrder> getListDetailOrder(int idorder) {
+	    List<DetailOrder> orders = new ArrayList<>();
+	    String query = "SELECT d.idbook, b.title, d.quantity, b.price FROM detailorder d "
+	                 + "INNER JOIN book b ON d.idbook = b.id WHERE d.idorder = ?";
+	    
+	    try (Connection conn = DBConnect.getConnection();
+	         PreparedStatement ps = conn.prepareStatement(query)) {
+	        
+	        ps.setInt(1, idorder);
+	        
+	        try (ResultSet rs = ps.executeQuery()) {
+	            while (rs.next()) {
+	            	
+	                double price = rs.getDouble("price");
+	                int quantity = rs.getInt("quantity");
+	                int total = (int) (price * quantity);
+	                
+	                DetailOrder deor = new DetailOrder(
+	                    rs.getInt("idbook"),
+	                    rs.getString("title"),
+	                    quantity,
+	                    total 
+	                );
+	                
+	                orders.add(deor);
+	            }
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	    
+	    return orders;
+	}
+
 
 }

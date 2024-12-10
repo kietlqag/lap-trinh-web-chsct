@@ -17,48 +17,49 @@ import jakarta.servlet.http.HttpSession;
 public class VendorLoginController extends HttpServlet{
 
 	private static final long serialVersionUID = 1L;
-	
+
 	IAccountService service = new AccountServiceImp();
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.getRequestDispatcher("/Views/Vendor/Login.jsp").forward(req, resp);
+		req.getRequestDispatcher("/Vendor/Login.jsp").forward(req, resp);
 	}
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		resp.setContentType("text/html");
-		resp.setCharacterEncoding("UTF-8");
-		req.setCharacterEncoding("UTF-8");
 		
-        String username = req.getParameter("username");
-        String password = req.getParameter("password");
-        boolean isRememberMe = false;
-		String remember = req.getParameter("remember");
-		
-		String alertMsg = "";
-		
-		if ("on".equals(remember)) {
-			isRememberMe = true;
-		}
-		
-        Account account = service.Login(username, password, "vendor");
+		// Set encoding for request and response
+	    resp.setContentType("text/html");
+	    resp.setCharacterEncoding("UTF-8");
+	    req.setCharacterEncoding("UTF-8");
 
-        if (account != null) {
-            HttpSession session = req.getSession();
-            session.setAttribute("account", account);
+	    // Retrieve form parameters
+	    String username = req.getParameter("username");
+	    String password = req.getParameter("password");
+	    boolean isRememberMe = "on".equals(req.getParameter("remember"));
 
-            if (isRememberMe) {
-                Cookie cookie = new Cookie("username", username);
-                cookie.setMaxAge(60 * 60 * 24 * 30); 
-                resp.addCookie(cookie);
-            }
-            resp.sendRedirect(req.getContextPath() + "/Vendor/Home");
-            
-        } else {
-        	alertMsg = "Tài khoản hoặc mật khẩu không đúng";
-			req.setAttribute("alert", alertMsg);
-            req.getRequestDispatcher("/Views/Vendor/Login.jsp").forward(req, resp);
-        }
+	    // Login service call
+	    Account account = service.Login(username, password, "vendor");
+	    
+	    if (account != null) {
+	    	
+	        HttpSession session = req.getSession();
+	        session.setAttribute("username", account.getUsername()); 
+	        session.setAttribute("account", account); 
+
+	        if (isRememberMe) {
+	            Cookie usernameCookie = new Cookie("username", username);
+	            usernameCookie.setMaxAge(60 * 60 * 24 * 30); // 30 days
+	            resp.addCookie(usernameCookie);
+	        }
+
+	        // Redirect to home page
+	        resp.sendRedirect(req.getContextPath() + "/Vendor/Revenue");
+	    } else {
+	        // Login failed
+	        String alertMsg = "Tài khoản hoặc mật khẩu không đúng";
+	        req.setAttribute("alert", alertMsg);
+	        req.getRequestDispatcher("/Vendor/Login.jsp").forward(req, resp);
+	    }
 	}
 }
