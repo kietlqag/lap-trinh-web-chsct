@@ -3,6 +3,7 @@ package Services;
 import java.io.Serializable;
 
 import Models.Account;
+import Models.User;
 
 public interface IAccountService extends Serializable{
 
@@ -11,4 +12,5 @@ public interface IAccountService extends Serializable{
 	boolean register(String email, String username, String password, String role, String token);
 	boolean checkExistUsername(String username);
 	boolean activateAccount(String token);
+	User getUserByUsername(String username);
 }

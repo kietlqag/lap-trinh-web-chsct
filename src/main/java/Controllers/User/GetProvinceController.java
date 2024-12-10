@@ -13,7 +13,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet("/User/Payment")
+@WebServlet("/User/Province")
 public class GetProvinceController extends HttpServlet{
 
 	private static final long serialVersionUID = 1L;
@@ -23,7 +23,7 @@ public class GetProvinceController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		List<Province> provinces = new ArrayList<>();
-		provinces = service.getListProvice();
+		provinces = service.getListProvince();
 		req.setAttribute("provinces", provinces);
 		req.getRequestDispatcher("/bootstrap5/checkout.jsp").forward(req, resp);
 	}

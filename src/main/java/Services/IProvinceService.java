@@ -7,5 +7,5 @@ import Models.Province;
 
 public interface IProvinceService extends Serializable{
 
-	List<Province> getListProvice();
+	List<Province> getListProvince();
 }

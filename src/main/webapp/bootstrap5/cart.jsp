@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+ <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Bookly - Bookstore eCommerce Website Template</title>
+    <title>Giỏ hàng</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,9 +13,8 @@
     <meta name="author" content="">
     <meta name="keywords" content="">
     <meta name="description" content="">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/bootstrap5/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -135,76 +134,7 @@
       </symbol>
     </svg>
 
-    <div id="preloader" class="preloader-container">
-      <div class="book">
-        <div class="inner">
-          <div class="left"></div>
-          <div class="middle"></div>
-          <div class="right"></div>
-        </div>
-      </div>
-    </div>
-
 	<%@ include file="/bootstrap5/header.jsp" %>
-	
-    <div class="search-popup">
-      <div class="search-popup-container">
-
-        <form role="search" method="get" class="search-form" action="">
-          <input type="search" id="search-form" class="search-field" placeholder="Type and press enter" value=""
-            name="s" />
-          <button type="submit" class="search-submit"><svg class="search">
-              <use xlink:href="#search"></use>
-            </svg></button>
-        </form>
-
-        <h5 class="cat-list-title">Browse Categories</h5>
-
-        <ul class="cat-list">
-          <li class="cat-list-item">
-            <a href="#" title="Romance">Romance</a>
-          </li>
-          <li class="cat-list-item">
-            <a href="#" title="Thriller">Thriller</a>
-          </li>
-          <li class="cat-list-item">
-            <a href="#" title="Sci-fi">Sci-fi</a>
-          </li>
-          <li class="cat-list-item">
-            <a href="#" title="Cooking">Cooking</a>
-          </li>
-          <li class="cat-list-item">
-            <a href="#" title="Health">Health</a>
-          </li>
-          <li class="cat-list-item">
-            <a href="#" title="Lifestyle">Lifestyle</a>
-          </li>
-          <li class="cat-list-item">
-            <a href="#" title="Fiction">Fiction</a>
-          </li>
-        </ul>
-
-      </div>
-    </div>
-
-    <section class="hero-section position-relative padding-large"
-      style="background-image: url(images/banner-image-bg-1.jpg); background-size: cover; background-repeat: no-repeat; background-position: center; height: 400px;">
-      <div class="hero-content">
-        <div class="container">
-          <div class="row">
-            <div class="text-center">
-              <h1>Cart</h1>
-              <div class="breadcrumbs">
-                <span class="item">
-                  <a href="index.jsp">Home > </a>
-                </span>
-                <span class="item text-decoration-underline">Cart</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
 
     <section class="cart padding-large">
       <div class="container">
@@ -212,587 +142,91 @@
           <div class="cart-table">
             <div class="cart-header border-bottom border-top">
               <div class="row d-flex text-capitalize">
-                <h4 class="col-lg-4 py-3 m-0">Product</h4>
-                <h4 class="col-lg-3 py-3 m-0">Quantity</h4>
-                <h4 class="col-lg-4 py-3 m-0">Subtotal</h4>
+                <h4 class="col-lg-4 py-3 m-0">Sách</h4>
+                <h4 class="col-lg-3 py-3 m-0">Số lượng</h4>
+                <h4 class="col-lg-4 py-3 m-0">Thành tiền</h4>
               </div>
             </div>
 
-            <div class="cart-item border-bottom padding-small">
-              <div class="row align-items-center">
-                <div class="col-lg-4 col-md-3">
-                  <div class="cart-info d-flex gap-2 flex-wrap align-items-center">
-                    <div class="col-lg-5">
-                      <div class="card-image">
-                        <img src="images/cart-item1.png" alt="cart-img" class="img-fluid border rounded-3">
-                      </div>
-                    </div>
-                    <div class="col-lg-4">
-                      <div class="card-detail">
-                        <h5 class="mt-2"><a href="single-product.jsp">The Emerald Crown</a></h5>
-                        <div class="card-price">
-                          <span class="price text-primary fw-light" data-currency-usd="$2000.00">$2000.00</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-6 col-md-7">
-                  <div class="row d-flex">
-                    <div class="col-md-6">
-                      <div class="product-quantity my-2 my-2">
-                        <div class="input-group product-qty align-items-center" style="max-width: 150px;">
-                          <span class="input-group-btn">
-                            <button type="button" class="bg-white shadow border rounded-3 fw-light quantity-left-minus"
-                              data-type="minus" data-field="">
-                              <svg width="16" height="16">
-                                <use xlink:href="#minus"></use>
-                              </svg>
-                            </button>
-                          </span>
-                          <input type="text" id="quantity" name="quantity"
-                            class="form-control bg-white shadow border rounded-3 py-2 mx-2 input-number text-center"
-                            value="1" min="1" max="100" required>
-                          <span class="input-group-btn">
-                            <button type="button" class="bg-white shadow border rounded-3 fw-light quantity-right-plus"
-                              data-type="plus" data-field="">
-                              <svg width="16" height="16">
-                                <use xlink:href="#plus"></use>
-                              </svg>
-                            </button>
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-4">
-                      <div class="total-price">
-                        <span class="money fs-2 fw-light text-primary">$2000.00</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-1 col-md-2">
-                  <div class="cart-cross-outline">
-                    <a href="#">
-                      <svg class="cart-cross-outline" width="38" height="38">
-                        <use xlink:href="#cart-cross-outline"></use>
-                      </svg>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="cart-item border-bottom padding-small">
-              <div class="row align-items-center">
-                <div class="col-lg-4 col-md-3">
-                  <div class="cart-info d-flex gap-2 flex-wrap align-items-center">
-                    <div class="col-lg-5">
-                      <div class="card-image">
-                        <img src="images/cart-item2.png" alt="cart-img" class="img-fluid border rounded-3">
-                      </div>
-                    </div>
-                    <div class="col-lg-4">
-                      <div class="card-detail">
-                        <h5 class="mt-2"><a href="single-product.jsp">The Last Enchantment</a></h5>
-                        <div class="card-price">
-                          <span class="price text-primary fw-light" data-currency-usd="$2000.00">$400.00</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-6 col-md-7">
-                  <div class="row d-flex">
-                    <div class="col-lg-6">
-                      <div class="product-quantity my-2">
-                        <div class="input-group product-qty align-items-center" style="max-width: 150px;">
-                          <span class="input-group-btn">
-                            <button type="button" class="bg-white shadow border rounded-3 fw-light quantity-left-minus"
-                              data-type="minus" data-field="">
-                              <svg width="16" height="16">
-                                <use xlink:href="#minus"></use>
-                              </svg>
-                            </button>
-                          </span>
-                          <input type="text" id="quantity" name="quantity"
-                            class="form-control bg-white shadow border rounded-3 py-2 mx-2 input-number text-center"
-                            value="1" min="1" max="100" required>
-                          <span class="input-group-btn">
-                            <button type="button" class="bg-white shadow border rounded-3 fw-light quantity-right-plus"
-                              data-type="plus" data-field="">
-                              <svg width="16" height="16">
-                                <use xlink:href="#plus"></use>
-                              </svg>
-                            </button>
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-lg-4">
-                      <div class="total-price">
-                        <span class="money fs-2 fw-light text-primary">$400.00</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-1 col-md-2">
-                  <div class="cart-cross-outline">
-                    <a href="#">
-                      <svg class="cart-cross-outline" width="38" height="38">
-                        <use xlink:href="#cart-cross-outline"></use>
-                      </svg>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="cart-totals padding-medium pb-0">
-            <h3 class="mb-3">Cart Totals</h3>
-            <div class="total-price pb-3">
-              <table cellspacing="0" class="table text-capitalize">
-                <tbody>
-                  <tr class="subtotal pt-2 pb-2 border-top border-bottom">
-                    <th>Subtotal</th>
-                    <td data-title="Subtotal">
-                      <span class="price-amount amount text-primary ps-5 fw-light">
-                        <bdi>
-                          <span class="price-currency-symbol">$</span>2,400.00
-                        </bdi>
-                      </span>
-                    </td>
-                  </tr>
-                  <tr class="order-total pt-2 pb-2 border-bottom">
-                    <th>Total</th>
-                    <td data-title="Total">
-                      <span class="price-amount amount text-primary ps-5 fw-light">
-                        <bdi>
-                          <span class="price-currency-symbol">$</span>2,400.00</bdi>
-                      </span>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <div class="button-wrap d-flex flex-wrap gap-3">
-              <button class="btn">Update Cart</button>
-              <button class="btn">Continue Shopping</button>
-              <button class="btn">Proceed to checkout</button>
-            </div>
-          </div>
+			<div class="cart-container">
+			    <c:forEach var="item" items="${carts}">
+			        <div class="cart-item border-bottom padding-small">
+			            <div class="row align-items-center">
+			                <div class="col-lg-4 col-md-3">
+			                    <div class="cart-info d-flex gap-2 flex-wrap align-items-center">
+			                        <div class="col-lg-5">
+			                            <c:choose>
+			                                <c:when test="${item.url.startsWith('https')}">
+			                                    <c:set var="imgUrl" value="${item.url}" />
+			                                </c:when>
+			                                <c:otherwise>
+			                                    <c:set var="imgUrl" value="${pageContext.request.contextPath}/image?fname=${item.url}" />
+			                                </c:otherwise>
+			                            </c:choose>
+			                            <div class="card-image">
+			                                <img src="${imgUrl}" alt="cart-img" class="img-fluid border rounded-3">
+			                            </div>
+			                        </div>
+			                        <div class="col-lg-4">
+			                            <div class="card-detail">
+			                                <h5 class="mt-2 "><a href="single-product.jsp?id=${item.bookid}">${item.bookname}</a></h5>
+			                                <div class="card-price">
+			                                    <span class="price text-primary fw-light" data-currency-usd="${item.bookprice}">
+			                                        ${item.bookprice}đ
+			                                    </span>
+			                                </div>
+			                            </div>
+			                        </div>
+			                    </div>
+			                </div>
+			                <div class="col-lg-6 col-md-7">
+			                    <div class="row d-flex">
+			                        <div class="col-lg-6 col-md-7">
+									    <div class="row d-flex">
+									        <div class="col-lg-6">
+									            <div class="product-quantity my-2">
+									                <div class="input-group product-qty align-items-center" style="max-width: 150px;">
+									                    <span class="form-control bg-white shadow border rounded-3 py-2 mx-2 text-center">
+									                        ${item.quantity}
+									                    </span>
+									                </div>
+									            </div>
+									        </div>
+									    </div>
+									</div>
+			                        <div class="col-lg-4">
+			                            <div class="total-price">
+			                                <span class="money fs-2 fw-light text-primary">${item.totalPrice}đ</span>
+			                            </div>
+			                        </div>
+			                    </div>
+			                </div>
+			                <div class="col-lg-1 col-md-2">
+			                    <div class="cart-cross-outline">
+			                        <a href="${pageContext.request.contextPath}/User/Remove?productId=${item.bookid}">
+			                            <svg class="cart-cross-outline" width="35" height="35">
+			                                <use xlink:href="#cart-cross-outline"></use>
+			                            </svg>
+			                        </a>
+			                    </div>
+			                </div>
+			            </div>
+			        </div>
+			    </c:forEach>
+			</div>
+
+
+          <form action="${pageContext.request.contextPath}/User/CheckoutCart" method="get">
+		    <button type="submit" class="btn btn-primary">Thanh toán</button>
+		</form>
         </div>
       </div>
     </section>
 
-    <section id="customers-reviews" class="position-relative padding-large"
-      style="background-image: url(images/banner-image-bg.jpg); background-size: cover; background-repeat: no-repeat; background-position: center; height: 600px;">
-      <div class="container offset-md-3 col-md-6 ">
-        <div class="position-absolute top-50 end-0 pe-0 pe-xxl-5 me-0 me-xxl-5 swiper-next testimonial-button-next">
-          <svg class="chevron-forward-circle d-flex justify-content-center align-items-center p-2" width="80" height="80">
-            <use xlink:href="#alt-arrow-right-outline"></use>
-          </svg>
-        </div>
-        <div class="position-absolute top-50 start-0 ps-0 ps-xxl-5 ms-0 ms-xxl-5 swiper-prev testimonial-button-prev">
-          <svg class="chevron-back-circle d-flex justify-content-center align-items-center p-2" width="80" height="80">
-            <use xlink:href="#alt-arrow-left-outline"></use>
-          </svg>
-        </div>
-        <div class="section-title mb-4 text-center">
-          <h3 class="mb-4">Customers reviews</h3>
-        </div>
-        <div class="swiper testimonial-swiper ">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide">
-              <div class="card position-relative text-left p-5 border rounded-3">
-                <blockquote>"I stumbled upon this bookstore while visiting the city, and it instantly became my favorite spot. The cozy atmosphere, friendly staff, and wide selection of books make every visit a delight!"</blockquote>
-                <div class="rating text-warning d-flex align-items-center">
-                  <svg class="star star-fill">
-                    <use xlink:href="#star-fill"></use>
-                  </svg>
-                  <svg class="star star-fill">
-                    <use xlink:href="#star-fill"></use>
-                  </svg>
-                  <svg class="star star-fill">
-                    <use xlink:href="#star-fill"></use>
-                  </svg>
-                  <svg class="star star-fill">
-                    <use xlink:href="#star-fill"></use>
-                  </svg>
-                  <svg class="star star-fill">
-                    <use xlink:href="#star-fill"></use>
-                  </svg>
-                </div>
-                <h5 class="mt-1 fw-normal">Emma Chamberlin</h5>
-              </div>
-            </div>
-            <div class="swiper-slide">
-              <div class="card position-relative text-left p-5 border rounded-3">
-                <blockquote>"As an avid reader, I'm always on the lookout for new releases, and this bookstore never disappoints. They always have the latest titles, and their recommendations have introduced me to some incredible reads!"</blockquote>
-                <div class="rating text-warning d-flex align-items-center">
-                  <svg class="star star-fill">
-                    <use xlink:href="#star-fill"></use>
-                  </svg>
-                  <svg class="star star-fill">
-                    <use xlink:href="#star-fill"></use>
-                  </svg>
-                  <svg class="star star-fill">
-                    <use xlink:href="#star-fill"></use>
-                  </svg>
-                  <svg class="star star-fill">
-                    <use xlink:href="#star-fill"></use>
-                  </svg>
-                  <svg class="star star-fill">
-                    <use xlink:href="#star-fill"></use>
-                  </svg>
-                </div>
-                <h5 class="mt-1 fw-normal">Thomas John</h5>
-              </div>
-            </div>
-            <div class="swiper-slide">
-              <div class="card position-relative text-left p-5 border rounded-3">
-                <blockquote>"I ordered a few books online from this store, and I was impressed by the quick delivery and careful packaging. It's clear that they prioritize customer satisfaction, and I'll definitely be shopping here again!"</blockquote>
-                <div class="rating text-warning d-flex align-items-center">
-                  <svg class="star star-fill">
-                    <use xlink:href="#star-fill"></use>
-                  </svg>
-                  <svg class="star star-fill">
-                    <use xlink:href="#star-fill"></use>
-                  </svg>
-                  <svg class="star star-fill">
-                    <use xlink:href="#star-fill"></use>
-                  </svg>
-                  <svg class="star star-fill">
-                    <use xlink:href="#star-fill"></use>
-                  </svg>
-                  <svg class="star star-fill">
-                    <use xlink:href="#star-fill"></use>
-                  </svg>
-                </div>
-                <h5 class="mt-1 fw-normal">Kevin Bryan</h5>
-              </div>
-            </div>
-            <div class="swiper-slide">
-              <div class="card position-relative text-left p-5 border rounded-3">
-                <blockquote>“I stumbled upon this tech store while searching for a new laptop, and I couldn't be happier
-                  with my experience! The staff was incredibly knowledgeable and guided me through the process of choosing
-                  the perfect device for my needs. Highly recommended!”</blockquote>
-                <div class="rating text-warning d-flex align-items-center">
-                  <svg class="star star-fill">
-                    <use xlink:href="#star-fill"></use>
-                  </svg>
-                  <svg class="star star-fill">
-                    <use xlink:href="#star-fill"></use>
-                  </svg>
-                  <svg class="star star-fill">
-                    <use xlink:href="#star-fill"></use>
-                  </svg>
-                  <svg class="star star-fill">
-                    <use xlink:href="#star-fill"></use>
-                  </svg>
-                  <svg class="star star-fill">
-                    <use xlink:href="#star-fill"></use>
-                  </svg>
-                </div>
-                <h5 class="mt-1 fw-normal">Stevin</h5>
-              </div>
-            </div>
-            <div class="swiper-slide">
-              <div class="card position-relative text-left p-5 border rounded-3">
-                <blockquote>“I stumbled upon this tech store while searching for a new laptop, and I couldn't be happier
-                  with my experience! The staff was incredibly knowledgeable and guided me through the process of choosing
-                  the perfect device for my needs. Highly recommended!”</blockquote>
-                <div class="rating text-warning d-flex align-items-center">
-                  <svg class="star star-fill">
-                    <use xlink:href="#star-fill"></use>
-                  </svg>
-                  <svg class="star star-fill">
-                    <use xlink:href="#star-fill"></use>
-                  </svg>
-                  <svg class="star star-fill">
-                    <use xlink:href="#star-fill"></use>
-                  </svg>
-                  <svg class="star star-fill">
-                    <use xlink:href="#star-fill"></use>
-                  </svg>
-                  <svg class="star star-fill">
-                    <use xlink:href="#star-fill"></use>
-                  </svg>
-                </div>
-                <h5 class="mt-1 fw-normal">Roman</h5>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="latest-posts" class="padding-large">
-      <div class="container">
-        <div class="section-title d-md-flex justify-content-between align-items-center mb-4">
-          <h3 class="d-flex align-items-center">Latest posts</h3>
-          <a href="shop.jsp" class="btn">View All</a>
-        </div>
-        <div class="row">
-          <div class="col-md-3 posts mb-4">
-            <img src="images/post-item1.jpg" alt="post image" class="img-fluid rounded-3">
-            <a href="blog.jsp" class="fs-6 text-primary">Books</a>
-            <h4 class="card-title mb-2 text-capitalize text-dark"><a href="single-post.jsp">10 Must-Read Books of the Year: Our Top Picks!</a></h4>
-            <p class="mb-2">Dive into the world of cutting-edge technology with our latest blog post, where we highlight
-              five essential gadg <span><a class="text-decoration-underline text-black-50" href="single-post.jsp">Read More</a></span>
-            </p>
-          </div>
-          <div class="col-md-3 posts mb-4">
-            <img src="images/post-item2.jpg" alt="post image" class="img-fluid rounded-3">
-            <a href="blog.jsp" class="fs-6 text-primary">Books</a>
-            <h4 class="card-title mb-2 text-capitalize text-dark"><a href="single-post.jsp">The Fascinating Realm of Science Fiction</a></h4>
-            <p class="mb-2">Explore the intersection of technology and sustainability in our latest blog post. Learn about
-              the innovative <span><a class="text-decoration-underline text-black-50" href="single-post.jsp">Read More</a></span> </p>
-          </div>
-          <div class="col-md-3 posts mb-4">
-            <img src="images/post-item3.jpg" alt="post image" class="img-fluid rounded-3">
-            <a href="blog.jsp" class="fs-6 text-primary">Books</a>
-            <h4 class="card-title mb-2 text-capitalize text-dark"><a href="single-post.jsp">Finding Love in the Pages of a Book</a></h4>
-            <p class="mb-2">Stay ahead of the curve with our insightful look into the rapidly evolving landscape of
-              wearable technology. <span><a class="text-decoration-underline text-black-50" href="single-post.jsp">Read More</a></span>
-            </p>
-          </div>
-          <div class="col-md-3 posts mb-4">
-            <img src="images/post-item4.jpg" alt="post image" class="img-fluid rounded-3">
-            <a href="blog.jsp" class="fs-6 text-primary">Books</a>
-            <h4 class="card-title mb-2 text-capitalize text-dark"><a href="single-post.jsp">Reading for Mental Health: How Books Can Heal and Inspire</a></h4>
-            <p class="mb-2">In today's remote work environment, productivity is key. Discover the top apps and tools that
-              can help you stay <span><a class="text-decoration-underline text-black-50" href="single-post.jsp">Read More</a></span>
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="instagram">
-      <div class="container">
-        <div class="text-center mb-4">
-          <h3>Instagram</h3>
-        </div>
-        <div class="row">
-          <div class="col-md-2">
-            <figure class="instagram-item position-relative rounded-3">
-              <a href="https://templatesjungle.com/" class="image-link position-relative">
-                <div class="icon-overlay position-absolute d-flex justify-content-center">
-                  <svg class="instagram">
-                    <use xlink:href="#instagram"></use>
-                  </svg>
-                </div>
-                <img src="images/insta-item1.jpg" alt="instagram" class="img-fluid rounded-3 insta-image">
-              </a>
-            </figure>
-          </div>
-          <div class="col-md-2">
-            <figure class="instagram-item position-relative rounded-3">
-              <a href="https://templatesjungle.com/" class="image-link position-relative">
-                <div class="icon-overlay position-absolute d-flex justify-content-center">
-                  <svg class="instagram">
-                    <use xlink:href="#instagram"></use>
-                  </svg>
-                </div>
-                <img src="images/insta-item2.jpg" alt="instagram" class="img-fluid rounded-3 insta-image">
-              </a>
-            </figure>
-          </div>
-          <div class="col-md-2">
-            <figure class="instagram-item position-relative rounded-3">
-              <a href="https://templatesjungle.com/" class="image-link position-relative">
-                <div class="icon-overlay position-absolute d-flex justify-content-center">
-                  <svg class="instagram">
-                    <use xlink:href="#instagram"></use>
-                  </svg>
-                </div>
-                <img src="images/insta-item3.jpg" alt="instagram" class="img-fluid rounded-3 insta-image">
-              </a>
-            </figure>
-          </div>
-          <div class="col-md-2">
-            <figure class="instagram-item position-relative rounded-3">
-              <a href="https://templatesjungle.com/" class="image-link position-relative">
-                <div class="icon-overlay position-absolute d-flex justify-content-center">
-                  <svg class="instagram">
-                    <use xlink:href="#instagram"></use>
-                  </svg>
-                </div>
-                <img src="images/insta-item4.jpg" alt="instagram" class="img-fluid rounded-3 insta-image">
-              </a>
-            </figure>
-          </div>
-          <div class="col-md-2">
-            <figure class="instagram-item position-relative rounded-3">
-              <a href="https://templatesjungle.com/" class="image-link position-relative">
-                <div class="icon-overlay position-absolute d-flex justify-content-center">
-                  <svg class="instagram">
-                    <use xlink:href="#instagram"></use>
-                  </svg>
-                </div>
-                <img src="images/insta-item5.jpg" alt="instagram" class="img-fluid rounded-3 insta-image">
-              </a>
-            </figure>
-          </div>
-          <div class="col-md-2">
-            <figure class="instagram-item position-relative rounded-3">
-              <a href="https://templatesjungle.com/" class="image-link position-relative">
-                <div class="icon-overlay position-absolute d-flex justify-content-center">
-                  <svg class="instagram">
-                    <use xlink:href="#instagram"></use>
-                  </svg>
-                </div>
-                <img src="images/insta-item6.jpg" alt="instagram" class="img-fluid rounded-3 insta-image">
-              </a>
-            </figure>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <footer id="footer" class="padding-large">
-      <div class="container">
-        <div class="row">
-          <div class="footer-top-area">
-            <div class="row d-flex flex-wrap justify-content-between">
-              <div class="col-lg-3 col-sm-6 pb-3">
-                <div class="footer-menu">
-                  <img src="images/main-logo.png" alt="logo" class="img-fluid mb-2">
-                  <p>Nisi, purus vitae, ultrices nunc. Sit ac sit suscipit hendrerit. Gravida massa volutpat aenean odio
-                    erat nullam fringilla.</p>
-                  <div class="social-links">
-                    <ul class="d-flex list-unstyled">
-                      <li>
-                        <a href="#">
-                          <svg class="facebook">
-                            <use xlink:href="#facebook" />
-                          </svg>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          <svg class="instagram">
-                            <use xlink:href="#instagram" />
-                          </svg>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          <svg class="twitter">
-                            <use xlink:href="#twitter" />
-                          </svg>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          <svg class="linkedin">
-                            <use xlink:href="#linkedin" />
-                          </svg>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          <svg class="youtube">
-                            <use xlink:href="#youtube" />
-                          </svg>
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-2 col-sm-6 pb-3">
-                <div class="footer-menu text-capitalize">
-                  <h5 class="widget-title pb-2">Quick Links</h5>
-                  <ul class="menu-list list-unstyled text-capitalize">
-                    <li class="menu-item mb-1">
-                      <a href="#">Home</a>
-                    </li>
-                    <li class="menu-item mb-1">
-                      <a href="#">About</a>
-                    </li>
-                    <li class="menu-item mb-1">
-                      <a href="#">Shop</a>
-                    </li>
-                    <li class="menu-item mb-1">
-                      <a href="#">Blogs</a>
-                    </li>
-                    <li class="menu-item mb-1">
-                      <a href="#">Contact</a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              <div class="col-lg-3 col-sm-6 pb-3">
-                <div class="footer-menu text-capitalize">
-                  <h5 class="widget-title pb-2">Help & Info Help</h5>
-                  <ul class="menu-list list-unstyled">
-                    <li class="menu-item mb-1">
-                      <a href="#">Track Your Order</a>
-                    </li>
-                    <li class="menu-item mb-1">
-                      <a href="#">Returns Policies</a>
-                    </li>
-                    <li class="menu-item mb-1">
-                      <a href="#">Shipping + Delivery</a>
-                    </li>
-                    <li class="menu-item mb-1">
-                      <a href="#">Contact Us</a>
-                    </li>
-                    <li class="menu-item mb-1">
-                      <a href="#">Faqs</a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              <div class="col-lg-3 col-sm-6 pb-3">
-                <div class="footer-menu contact-item">
-                  <h5 class="widget-title text-capitalize pb-2">Contact Us</h5>
-                  <p>Do you have any queries or suggestions? <a href="mailto:"
-                      class="text-decoration-underline">yourinfo@gmail.com</a></p>
-                  <p>If you need support? Just give us a call. <a href="#" class="text-decoration-underline">+55 111 222
-                      333 44</a></p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </footer>
-    <hr>
-    <div id="footer-bottom" class="mb-2">
-      <div class="container">
-        <div class="d-flex flex-wrap justify-content-between">
-          <div class="ship-and-payment d-flex gap-md-5 flex-wrap">
-            <div class="shipping d-flex">
-              <p>We ship with:</p>
-              <div class="card-wrap ps-2">
-                <img src="images/dhl.png" alt="visa">
-                <img src="images/shippingcard.png" alt="mastercard">
-              </div>
-            </div>
-            <div class="payment-method d-flex">
-              <p>Payment options:</p>
-              <div class="card-wrap ps-2">
-                <img src="images/visa.jpg" alt="visa">
-                <img src="images/mastercard.jpg" alt="mastercard">
-                <img src="images/paypal.jpg" alt="paypal">
-              </div>
-            </div>
-          </div>
-          <div class="copyright">
-            <p>© Copyright 2024 Bookly. HTML Template by <a href="https://templatesjungle.com/"
-                target="_blank">TemplatesJungle</a>
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
+    <%@ include file="/bootstrap5/footer.jsp" %>
 
     <script src="js/jquery-1.11.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-      crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
     <script type="text/javascript" src="js/script.js"></script>
   </body>

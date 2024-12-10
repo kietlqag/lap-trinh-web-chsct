@@ -6,5 +6,5 @@ import Models.Province;
 
 public interface IProvinceDao {
 
-	List<Province> getListProvice();
+	List<Province> getListProvince();
 }

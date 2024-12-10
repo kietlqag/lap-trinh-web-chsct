@@ -12,7 +12,7 @@ import Models.Province;
 public class ProvinceDaoImp implements IProvinceDao{
 
 	@Override
-	public List<Province> getListProvice() {
+	public List<Province> getListProvince() {
 		List<Province> provinces = new ArrayList<>();
 	    String query = "SELECT * FROM province";
 

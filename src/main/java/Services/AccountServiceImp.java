@@ -4,6 +4,7 @@ package Services;
 import DAO.AccountDaoImp;
 import DAO.IAccountDao;
 import Models.Account;
+import Models.User;
 
 @SuppressWarnings("serial")
 public class AccountServiceImp implements IAccountService{
@@ -45,6 +46,11 @@ public class AccountServiceImp implements IAccountService{
 	public boolean activateAccount(String token) {
 		
 		return accountDao.activateByToken(token);
+	}
+
+	@Override
+	public User getUserByUsername(String username) {
+		return accountDao.getUserByUsername(username);
 	}
 
 }

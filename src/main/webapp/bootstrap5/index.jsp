@@ -14,20 +14,12 @@
 <meta name="author" content="">
 <meta name="keywords" content="">
 <meta name="description" content="">
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
-	crossorigin="anonymous">
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/bootstrap5/style.css">
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/bootstrap5/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link
-	href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap"
-	rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
 </head>
 <body>
 	<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
@@ -157,190 +149,38 @@
 
 	<%@ include file="/bootstrap5/header.jsp"%>
 
-
-	<div class="search-popup">
-		<div class="search-popup-container">
-
-			<form role="search" method="get" class="search-form" action="">
-				<input type="search" id="search-form" class="search-field"
-					placeholder="Type and press enter" value="" name="s" />
-				<button type="submit" class="search-submit">
-					<svg class="search">
-              <use xlink:href="#search"></use>
-            </svg>
-				</button>
-			</form>
-
-			<h5 class="cat-list-title">TRUY CẬP DANH MỤC</h5>
-			<ul class="cat-list">
-				<li class="cat-list-item"><a href="#" title="BacHo">Tủ sách
-						Bác Hồ</a></li>
-				<li class="cat-list-item"><a href="#" title="Lyluanchinhtri">Tủ
-						sách lý luận chính trị</a></li>
-				<li class="cat-list-item"><a href="#" title="Luat">Tủ sách
-						Luật</a></li>
-				<li class="cat-list-item"><a href="#" title="Chibo">Tủ sách
-						Chi bộ</a></li>
-				<li class="cat-list-item"><a href="#" title="Chidao35">Tủ
-						sách Ban chỉ đạo 35</a></li>
-				<li class="cat-list-item"><a href="#" title="Giaotrinh">Tủ
-						sách Giáo trình và Tài liệu</a></li>
-				<li class="cat-list-item"><a href="#" title="Nhanvat">Tủ
-						sách Nhân vật</a></li>
-			</ul>
-
-		</div>
-	</div>
-
-
-	<section id="billboard"
-		class="position-relative d-flex align-items-center py-5 bg-light-gray"
-		style="background-image: url(${pageContext.request.contextPath}/bootstrap5/images/banner-image-bg.jpg); background-size: cover; background-repeat: no-repeat; background-position: center; height: 600px;">
-		<div
-			class="position-absolute end-0 pe-0 pe-xxl-5 me-0 me-xxl-5 swiper-next main-slider-button-next">
-		</div>
-		<div
-			class="position-absolute start-0 ps-0 ps-xxl-5 ms-0 ms-xxl-5 swiper-prev main-slider-button-prev">
-		</div>
-		<div class="container">
-			<div
-				class="row d-flex flex-column-reverse flex-md-row align-items-center">
-				<div
-					class="col-md-5 offset-md-1 mt-5 mt-md-0 text-center text-md-start">
-					<div class="banner-content">
-						<h2>Chủ tịch</h2>
-						<h2>Hồ Chí Minh</h2>
-						<p>19/05/1890 - 02/09/1969</p>
-						<a href="shop.jsp" class="btn mt-3">Mua Sách Ngay</a>
-					</div>
-				</div>
-				<div class="col-md-6 text-center">
-					<div class="image-holder">
-						<img
-							src="${pageContext.request.contextPath}/bootstrap5/images/CTHCM.jpg"
-							class="img-fluid" alt="banner">
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-
-	<section id="best-selling-items"
-		class="position-relative padding-large ">
-		<div class="container">
-			<div
-				class="section-title d-md-flex justify-content-between align-items-center mb-4">
-				<h3 class="d-flex align-items-center">Sách bán chạy</h3>
-				<a href="${pageContext.request.contextPath}/User/Books" class="btn">Xem
-					tất cả</a>
-			</div>
-			<div
-				class="position-absolute top-50 end-0 pe-0 pe-xxl-5 me-0 me-xxl-5 swiper-next product-slider-button-next">
-				<svg
-					class="chevron-forward-circle d-flex justify-content-center align-items-center p-2"
-					width="80" height="80">
-            <use xlink:href="#alt-arrow-right-outline"></use>
-          </svg>
-			</div>
-			<div
-				class="position-absolute top-50 start-0 ps-0 ps-xxl-5 ms-0 ms-xxl-5 swiper-prev product-slider-button-prev">
-				<svg
-					class="chevron-back-circle d-flex justify-content-center align-items-center p-2"
-					width="80" height="80">
-            <use xlink:href="#alt-arrow-left-outline"></use>
-          </svg>
-			</div>
-			<div class="swiper product-swiper">
-				<div class="swiper-wrapper">
-					<c:forEach var="book" items="${books}">
-						<div class="swiper-slide">
-							<div class="card position-relative p-4 border rounded-3">
-								<div class="position-absolute">
-									<p class="bg-primary py-1 px-3 fs-6 text-white rounded-2">${book.discountPercentage}%
-										off</p>
-								</div>
-								<c:if test="${book.imageUrl != null}">
-									<c:url value="${book.imageUrl}" var="imgUrl" />
-								</c:if>
-								<img src="${imgUrl}" class="img-fluid shadow-sm"
-									alt="${book.title}">
-
-								<h6 class="mt-4 mb-0 fw-bold">
-									<a
-										href="${pageContext.request.contextPath}/User/Details-Book?id=${book.id}">${book.title}</a>
-								</h6>
-
-								<div class="review-content d-flex">
-									<p class="my-2 me-2 fs-6 text-black-50">${book.author}</p>
-
-									<div class="rating text-warning d-flex align-items-center">
-										<!-- Hiển thị sao đánh giá -->
-										<c:forEach var="i" begin="1" end="${book.rating}">
-											<svg class="star star-fill">
-                                    <use xlink:href="#star-fill"></use>
-                                </svg>
-										</c:forEach>
-									</div>
-								</div>
-
-								<span class="price text-primary fw-bold mb-2 fs-5">
-									$${book.discountedPrice} <!-- Hiển thị giá sau giảm giá -->
-								</span>
-
-								<div
-									class="card-concern position-absolute start-0 end-0 d-flex gap-2">
-									<button type="button" class="btn btn-dark">
-										<svg class="cart">
-                                <use xlink:href="#cart"></use>
-                            </svg>
-									</button>
-									<a href="#" class="btn btn-dark"> <svg class="wishlist">
-                                <use xlink:href="#heart"></use>
-                            </svg>
-									</a>
-								</div>
-							</div>
-						</div>
-					</c:forEach>
-				</div>
-			</div>
-		</div>
-	</section>
-
 	<section id="limited-offer" class="padding-large"
-		style="background-image: url(${pageContext.request.contextPath}/bootstrap5/images/banner-image-bg-1.jpg); background-size: cover; background-repeat: no-repeat; background-position: center; height: 800px;">
-		<div class="container">
-			<div class="row d-flex align-items-center">
-				<div class="col-md-6 text-center">
-					<div class="image-holder">
-						<img src="${pageContext.request.contextPath}/bootstrap5/images/banner-image3.png" class="img-fluid" alt="banner">
-					</div>
-				</div>
-				<div
-					class="col-md-5 offset-md-1 mt-5 mt-md-0 text-center text-md-start">
-					<h2>Giảm sốc 30%!</h2>
-					<div id="countdown-clock"
-						class="text-dark d-flex align-items-center my-3">
-						<div class="time d-grid pe-3">
-							<span class="days fs-1 fw-normal"></span> <small>Days</small>
-						</div>
-						<span class="fs-1 text-primary">:</span>
-						<div class="time d-grid pe-3 ps-3">
-							<span class="hours fs-1 fw-normal"></span> <small>Hrs</small>
-						</div>
-						<span class="fs-1 text-primary">:</span>
-						<div class="time d-grid pe-3 ps-3">
-							<span class="minutes fs-1 fw-normal"></span> <small>Min</small>
-						</div>
-						<span class="fs-1 text-primary">:</span>
-						<div class="time d-grid ps-3">
-							<span class="seconds fs-1 fw-normal"></span> <small>Sec</small>
-						</div>
-					</div>
-					<a href="shop.jsp" class="btn mt-3">Mua ngay</a>
-				</div>
-			</div>
-		</div>
+	  style="background-image: url(${pageContext.request.contextPath}/bootstrap5/images/banner-image-bg-1.jpg); background-size: cover; background-repeat: no-repeat; background-position: center; height: 800px;">
+	  <div class="container">
+	    <div class="row d-flex align-items-center">
+	      <div class="col-md-6 text-center">
+	        <div class="image-holder">
+	          <img src="${pageContext.request.contextPath}/bootstrap5/images/banner-image3.png" class="img-fluid" alt="banner">
+	        </div>
+	      </div>
+	      <div class="col-md-5 offset-md-1 mt-5 mt-md-0 text-center text-md-start">
+	        <h2>Giảm sốc...</h2>
+	        <div id="countdown-clock" class="text-dark d-flex align-items-center my-3">
+	          <div class="time d-grid pe-3">
+	            <span class="days fs-1 fw-normal"></span> <small>Days</small>
+	          </div>
+	          <span class="fs-1 text-primary">:</span>
+	          <div class="time d-grid pe-3 ps-3">
+	            <span class="hours fs-1 fw-normal"></span> <small>Hrs</small>
+	          </div>
+	          <span class="fs-1 text-primary">:</span>
+	          <div class="time d-grid pe-3 ps-3">
+	            <span class="minutes fs-1 fw-normal"></span> <small>Min</small>
+	          </div>
+	          <span class="fs-1 text-primary">:</span>
+	          <div class="time d-grid ps-3">
+	            <span class="seconds fs-1 fw-normal"></span> <small>Sec</small>
+	          </div>
+	        </div>
+	        <a href="shop.jsp" class="btn mt-3">Mua ngay</a>
+	      </div>
+	    </div>
+	  </div>
 	</section>
 
 	<section id="items-listing" class="padding-large">
@@ -457,11 +297,36 @@
 	<%@ include file="/bootstrap5/footer.jsp"%>
 
 	<script src="js/jquery-1.11.0.min.js"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-		integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-		crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
 	<script type="text/javascript" src="js/script.js"></script>
+	<script>
+	  // Set the date we're counting down to
+	  const countdownDate = new Date("Dec 31, 2024 23:59:59").getTime();
+	
+	  // Update the countdown every 1 second
+	  const x = setInterval(function() {
+	    const now = new Date().getTime();
+	    const distance = countdownDate - now;
+	
+	    // Time calculations for days, hours, minutes and seconds
+	    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+	    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+	    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+	    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+	
+	    // Display the result in the elements with the respective classes
+	    document.querySelector(".days").innerText = days;
+	    document.querySelector(".hours").innerText = hours;
+	    document.querySelector(".minutes").innerText = minutes;
+	    document.querySelector(".seconds").innerText = seconds;
+	
+	    // If the countdown is over, display a message
+	    if (distance < 0) {
+	      clearInterval(x);
+	      document.getElementById("countdown-clock").innerHTML = "Offer Expired";
+	    }
+	  }, 1000);
+	</script>
 </body>
 </html>

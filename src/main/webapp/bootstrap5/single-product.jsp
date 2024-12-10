@@ -66,12 +66,12 @@
 	          <div class="element-header">
 	            <h1 class="product-title fs-4" style="text-align: justify;">${book.title}</h1>
 	            <div class="product-price d-flex align-items-center mt-2">
-				    <span class="fs-2 fw-light text-primary me-2">${discountedPrice}đ</span>
-				    <c:if test="${discountedPrice != price}">
-				        <del>${price}đ</del>
-				    </c:if>
-				</div>
-
+	              <span class="fs-2 fw-light text-primary me-2">${discountedPrice}đ</span>
+	              <c:if test="${discountedPrice != price}">
+	                <del>${price}đ</del>
+	              </c:if>
+	            </div>
+	
 	            <div class="rating text-warning d-flex align-items-center mb-2">
 	              <c:forEach var="i" begin="1" end="${book.rating}">
 	                <svg class="star star-fill">
@@ -86,10 +86,22 @@
 	            <div class="item-title">
 	              <l>Còn ${book.stock} sản phẩm </l>
 	            </div>
-	          </div>
-	          <div class="action-buttons my-3 d-flex flex-wrap gap-3">
-	            <a href="#" class="btn">Mua ngay</a>
-	            <a href="#" class="btn btn-dark">Thêm vào giỏ hàng</a>
+	            <form method="post" action="${pageContext.request.contextPath}/User/ActionHandler">
+				    <div class="d-flex align-items-center mt-3">
+				        <!-- Input số lượng mua -->
+				        <label for="quantity" class="me-3" style="font-size: 20px;">Số lượng:</label>
+				        <input type="number" id="quantity" name="quantity" value="1" min="1" max="${book.stock}" class="form-control w-auto" style="font-size: 12px;">
+				        
+				        <!-- Gửi thông tin sản phẩm -->
+				        <input type="hidden" name="bookId" value="${book.id}">
+				    </div>
+				    <div class="action-buttons my-3 d-flex flex-wrap gap-3">
+				        <!-- Nút Mua ngay -->
+				        <button type="submit" name="action" value="buyNow" class="btn btn-primary">Mua ngay</button>
+				        <!-- Nút Thêm vào giỏ hàng -->
+				        <button type="submit" name="action" value="addToCart" class="btn btn-dark">Thêm vào giỏ hàng</button>
+				    </div>
+				</form>
 	          </div>
 	        </div>
 	        <hr>
@@ -105,6 +117,7 @@
 	    </div>
 	  </div>
 	</section>
+
 	
 
 	<section class="product-tabs">

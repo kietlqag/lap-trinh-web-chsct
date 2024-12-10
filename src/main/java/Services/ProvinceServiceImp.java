@@ -12,8 +12,8 @@ public class ProvinceServiceImp implements IProvinceService{
 	IProvinceDao provinceDao = new ProvinceDaoImp();
 			
 	@Override
-	public List<Province> getListProvice() {
-		return provinceDao.getListProvice();
+	public List<Province> getListProvince() {
+		return provinceDao.getListProvince();
 	}
 
 }

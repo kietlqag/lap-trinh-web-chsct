@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Bookly - Bookstore eCommerce Website Template</title>
+    <title>Thanh toán</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -30,357 +30,204 @@
 
     <section class="checkout-wrap padding-large">
       <div class="container">
-        <form class="form-group">
+        <form action="${pageContext.request.contextPath}/User/Order" method="post">
           <div class="row d-flex flex-wrap">
             <div class="col-lg-6">
               <h3 class="mb-3">Chi tiết đơn hàng</h3>
               <div class="billing-details">
-                <label for="fname">Họ tên*</label>
-                <input type="text" id="fname" name="firstname" class="form-control mt-2 mb-4 ps-3">
-                <label for="provinces">Tỉnh/Thành phố:*</label>
-			        <select id="provinces" name="provinces" class="form-control mt-2 mb-4 ps-3">
-			            <option value="">-- Chọn tỉnh/thành phố --</option>
-			            <c:forEach var="province" items="${provinces}">
-			                <option value="${province}">${province}</option>
-			            </c:forEach>
-			        </select>
-                <label for="cname">Quận/Huyện/Thị xã:*</label>
-                <input type="text" id="cname" name="companyname" class="form-control mt-2 mb-4">
-                <label for="address">Số nhà/Đường/Thôn/Ấp:*</label>
-                <input type="text" id="adr" name="address" placeholder="House number and street name"
-                  class="form-control mt-3 ps-3 mb-3">
-                <input type="text" id="adr" name="address" placeholder="Appartments, suite, etc."
-                  class="form-control ps-3 mb-4">
-                <label for="city">Town / City *</label>
-                <input type="text" id="city" name="city" class="form-control mt-3 ps-3 mb-4">
-                <label for="state">State *</label>
-                <select class="form-select form-control mt-2 mb-4" aria-label="Default select example">
-                  <option selected="" hidden="">Florida</option>
-                  <option value="1">New York</option>
-                  <option value="2">Chicago</option>
-                  <option value="3">Texas</option>
-                  <option value="3">San Jose</option>
-                  <option value="3">Houston</option>
-                </select>
-                <label for="zip">Zip Code *</label>
-                <input type="text" id="zip" name="zip" class="form-control mt-2 mb-4 ps-3">
-                <label for="email">Phone *</label>
-                <input type="text" id="phone" name="phone" class="form-control mt-2 mb-4 ps-3">
-                <label for="email">Email address *</label>
-                <input type="text" id="email" name="email" class="form-control mt-2 mb-4 ps-3">
-              </div>
+			    <label for="firstname">Họ tên*</label>
+			    <input type="text" id="firstname" name="firstname" class="form-control mt-2 mb-4 ps-3" 
+			           value="${user.fullname != null ? user.fullname : ''}">
+			    
+			    <label for="provinces">Tỉnh/Thành phố:*</label>
+			    <select id="provinces" name="provinces" class="form-control mt-2 mb-4 ps-3">
+			        <option value="">-- Chọn tỉnh/thành phố --</option>
+			        <c:forEach var="province" items="${provinces}">
+			            <option value="${province}" 
+			                    ${province == user.province ? 'selected' : ''}>${province}</option>
+			        </c:forEach>
+			    </select>
+			    
+			    <label for="district">Quận/Huyện/Thị xã:*</label>
+			    <input type="text" id="district" name="district" class="form-control mt-2 mb-4" 
+			           value="${user.district != null ? user.district : ''}">
+			    
+			    <label for="address">Địa chỉ chi tiết:*</label>
+			    <input type="text" id="adr" name="address" class="form-control mt-3 ps-3 mb-3" 
+			           value="${user.address != null ? user.address : ''}">
+			    
+			    <label for="phone">Số điện thoại *</label>
+			    <input type="text" id="phone" name="phone" class="form-control mt-2 mb-4 ps-3" 
+			           value="${user.phone != null ? user.phone : ''}">
+			    
+			    <label for="email">Email *</label>
+			    <input type="text" id="email" name="email" class="form-control mt-2 mb-4 ps-3" 
+			           value="${account.email != null ? account.email : ''}">
+			</div>
+
             </div>
             <div class="col-lg-6">
               <div>
-                <h3 class="mb-3">Additional Information</h3>
+                <h3 class="mb-3">Ghi chú</h3>
                 <div class="billing-details">
-                  <label for="fname">Order notes (optional)</label>
-                  <textarea class="form-control pt-3 pb-3 ps-3 mt-2"
-                    placeholder="Notes about your order. Like special notes for delivery."></textarea>
+                  <label for="fname">Thêm dặn dò về đơn hàng</label>
+                  <textarea id="notes" name="notes" class="form-control pt-3 pb-3 ps-3 mt-2"></textarea>
                 </div>
               </div>
 
+			<div class="list-group mt-4">
+			  <h5>Phương thức vận chuyển</h5>
+			  <label class="list-group-item d-flex gap-2 border-0">
+			    <input class="form-check-input flex-shrink-0" type="radio" name="shippingMethod" value="1" id="shippingMethod1" checked>
+			    <span>Vận chuyển thường (thời gian nhận hàng từ 7-9 ngày)</span>
+			  </label>
+			  <label class="list-group-item d-flex gap-2 border-0">
+			    <input class="form-check-input flex-shrink-0" type="radio" name="shippingMethod" value="2" id="shippingMethod2">
+			    <span>Vận chuyển nhanh (thời gian nhận hàng từ 3-5 ngày))</span>
+			  </label>
+			  <label class="list-group-item d-flex gap-2 border-0">
+			    <input class="form-check-input flex-shrink-0" type="radio" name="shippingMethod" value="3" id="shippingMethod3">
+			    <span>Hoả tốc (thời gian nhận hàng từ 1-2 ngày)</span>
+			  </label>
+			</div>
+
+              <div class="list-group">
+                  <h5>Phương thức thanh toán</h5>
+                  <label class="list-group-item d-flex gap-2 border-0">
+                    <input class="form-check-input flex-shrink-0" type="radio" name="listGroupRadios"
+                      id="listGroupRadios1" value="Thanh toán khi nhận hàng" checked>
+                    <span>
+                      <p class="mb-1">Thanh toán khi nhận hàng </p>
+                    </span>
+                  </label>
+                  <label class="list-group-item d-flex gap-2 border-0">
+                    <input class="form-check-input flex-shrink-0" type="radio" name="listGroupRadios"
+                      id="listGroupRadios2" value="VNPay">
+                    <span>
+                      <p class="mb-1">VNPay</p>
+                    </span>
+                  </label>
+                </div>  
+                
               <div class="cart-totals padding-medium pb-0">
-                <h3 class="mb-3">Cart Totals</h3>
+                <h3 class="mb-3">Thanh toán</h3>
                 <div class="total-price pb-3">
                   <table cellspacing="0" class="table text-capitalize">
                     <tbody>
                       <tr class="subtotal pt-2 pb-2 border-top border-bottom">
-                        <th>Subtotal</th>
+                        <th>Thành tiền sản phẩm</th>
                         <td data-title="Subtotal">
                           <span class="price-amount amount text-primary ps-5 fw-light">
                             <bdi>
-                              <span class="price-currency-symbol">$</span>2,400.00
+                              <span class="price-currency-symbol"></span>${total}
                             </bdi>
                           </span>
                         </td>
                       </tr>
                       <tr class="order-total pt-2 pb-2 border-bottom">
-                        <th>Total</th>
-                        <td data-title="Total">
-                          <span class="price-amount amount text-primary ps-5 fw-light">
-                            <bdi>
-                              <span class="price-currency-symbol">$</span>2,400.00</bdi>
-                          </span>
-                        </td>
+						  <th>Phí vận chuyển</th>
+						  <td class="shipping-fee">
+						    <span class="price-amount amount text-primary ps-5 fw-light">
+						        <bdi><span class="price-currency-symbol"></span>0</bdi>
+						    </span>
+						 </td>
+						</tr>
+                      <tr class="order-total pt-2 pb-2 border-bottom">
+                        <th>Tổng thanh toán</th>
+                        <td class="total">
+						    <span class="price-amount amount text-primary ps-5 fw-light">
+						        <bdi><span class="price-currency-symbol"></span>0</bdi>
+						    </span>
+						</td>
+
                       </tr>
                     </tbody>
                   </table>
                 </div>
-                <div class="list-group">
-                  <label class="list-group-item d-flex gap-2 border-0">
-                    <input class="form-check-input flex-shrink-0" type="radio" name="listGroupRadios"
-                      id="listGroupRadios1" value="" checked>
-                    <span>
-                      <p class="mb-1">Direct bank transfer</p>
-                      <small>Make your payment directly into our bank account. Please use your Order ID. Your order will
-                        shipped after funds have cleared in our account.</small>
-                    </span>
-                  </label>
-                  <label class="list-group-item d-flex gap-2 border-0">
-                    <input class="form-check-input flex-shrink-0" type="radio" name="listGroupRadios"
-                      id="listGroupRadios2" value="">
-                    <span>
-                      <p class="mb-1">Check payments</p>
-                      <small>Please send a check to Store Name, Store Street, Store Town, Store State / County, Store
-                        Postcode.</small>
-                    </span>
-                  </label>
-                  <label class="list-group-item d-flex gap-2 border-0">
-                    <input class="form-check-input flex-shrink-0" type="radio" name="listGroupRadios"
-                      id="listGroupRadios3" value="">
-                    <span>
-                      <p class="mb-1">Cash on delivery</p>
-                      <small>Pay with cash upon delivery.</small>
-                    </span>
-                  </label>
-                  <label class="list-group-item d-flex gap-2 border-0">
-                    <input class="form-check-input flex-shrink-0" type="radio" name="listGroupRadios"
-                      id="listGroupRadios3" value="">
-                    <span>
-                      <p class="mb-1">Paypal</p>
-                      <small>Pay via PayPal; you can pay with your credit card if you don’t have a PayPal account.</small>
-                    </span>
-                  </label>
-                </div>
                 <div class="button-wrap mt-3">
-                  <button type="submit" name="submit" class="btn">Place an order</button>
-                </div>
+	                <input type="hidden" name="subtotal" id="subtotal" value="${total}">
+	    			<input type="hidden" name="shippingFee" id="shippingFee" value="0">
+			        <button type="submit" name="submit" class="btn">Đặt hàng</button>
+			    </div>
               </div>
-
             </div>
-
           </div>
         </form>
       </div>
     </section>
 
-    <section id="instagram">
-      <div class="container">
-        <div class="text-center mb-4">
-          <h3>Instagram</h3>
-        </div>
-        <div class="row">
-          <div class="col-md-2">
-            <figure class="instagram-item position-relative rounded-3">
-              <a href="https://templatesjungle.com/" class="image-link position-relative">
-                <div class="icon-overlay position-absolute d-flex justify-content-center">
-                  <svg class="instagram">
-                    <use xlink:href="#instagram"></use>
-                  </svg>
-                </div>
-                <img src="images/insta-item1.jpg" alt="instagram" class="img-fluid rounded-3 insta-image">
-              </a>
-            </figure>
-          </div>
-          <div class="col-md-2">
-            <figure class="instagram-item position-relative rounded-3">
-              <a href="https://templatesjungle.com/" class="image-link position-relative">
-                <div class="icon-overlay position-absolute d-flex justify-content-center">
-                  <svg class="instagram">
-                    <use xlink:href="#instagram"></use>
-                  </svg>
-                </div>
-                <img src="images/insta-item2.jpg" alt="instagram" class="img-fluid rounded-3 insta-image">
-              </a>
-            </figure>
-          </div>
-          <div class="col-md-2">
-            <figure class="instagram-item position-relative rounded-3">
-              <a href="https://templatesjungle.com/" class="image-link position-relative">
-                <div class="icon-overlay position-absolute d-flex justify-content-center">
-                  <svg class="instagram">
-                    <use xlink:href="#instagram"></use>
-                  </svg>
-                </div>
-                <img src="images/insta-item3.jpg" alt="instagram" class="img-fluid rounded-3 insta-image">
-              </a>
-            </figure>
-          </div>
-          <div class="col-md-2">
-            <figure class="instagram-item position-relative rounded-3">
-              <a href="https://templatesjungle.com/" class="image-link position-relative">
-                <div class="icon-overlay position-absolute d-flex justify-content-center">
-                  <svg class="instagram">
-                    <use xlink:href="#instagram"></use>
-                  </svg>
-                </div>
-                <img src="images/insta-item4.jpg" alt="instagram" class="img-fluid rounded-3 insta-image">
-              </a>
-            </figure>
-          </div>
-          <div class="col-md-2">
-            <figure class="instagram-item position-relative rounded-3">
-              <a href="https://templatesjungle.com/" class="image-link position-relative">
-                <div class="icon-overlay position-absolute d-flex justify-content-center">
-                  <svg class="instagram">
-                    <use xlink:href="#instagram"></use>
-                  </svg>
-                </div>
-                <img src="images/insta-item5.jpg" alt="instagram" class="img-fluid rounded-3 insta-image">
-              </a>
-            </figure>
-          </div>
-          <div class="col-md-2">
-            <figure class="instagram-item position-relative rounded-3">
-              <a href="https://templatesjungle.com/" class="image-link position-relative">
-                <div class="icon-overlay position-absolute d-flex justify-content-center">
-                  <svg class="instagram">
-                    <use xlink:href="#instagram"></use>
-                  </svg>
-                </div>
-                <img src="images/insta-item6.jpg" alt="instagram" class="img-fluid rounded-3 insta-image">
-              </a>
-            </figure>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <footer id="footer" class="padding-large">
-      <div class="container">
-        <div class="row">
-          <div class="footer-top-area">
-            <div class="row d-flex flex-wrap justify-content-between">
-              <div class="col-lg-3 col-sm-6 pb-3">
-                <div class="footer-menu">
-                  <img src="images/main-logo.png" alt="logo" class="img-fluid mb-2">
-                  <p>Nisi, purus vitae, ultrices nunc. Sit ac sit suscipit hendrerit. Gravida massa volutpat aenean odio
-                    erat nullam fringilla.</p>
-                  <div class="social-links">
-                    <ul class="d-flex list-unstyled">
-                      <li>
-                        <a href="#">
-                          <svg class="facebook">
-                            <use xlink:href="#facebook" />
-                          </svg>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          <svg class="instagram">
-                            <use xlink:href="#instagram" />
-                          </svg>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          <svg class="twitter">
-                            <use xlink:href="#twitter" />
-                          </svg>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          <svg class="linkedin">
-                            <use xlink:href="#linkedin" />
-                          </svg>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          <svg class="youtube">
-                            <use xlink:href="#youtube" />
-                          </svg>
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-2 col-sm-6 pb-3">
-                <div class="footer-menu text-capitalize">
-                  <h5 class="widget-title pb-2">Quick Links</h5>
-                  <ul class="menu-list list-unstyled text-capitalize">
-                    <li class="menu-item mb-1">
-                      <a href="#">Home</a>
-                    </li>
-                    <li class="menu-item mb-1">
-                      <a href="#">About</a>
-                    </li>
-                    <li class="menu-item mb-1">
-                      <a href="#">Shop</a>
-                    </li>
-                    <li class="menu-item mb-1">
-                      <a href="#">Blogs</a>
-                    </li>
-                    <li class="menu-item mb-1">
-                      <a href="#">Contact</a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              <div class="col-lg-3 col-sm-6 pb-3">
-                <div class="footer-menu text-capitalize">
-                  <h5 class="widget-title pb-2">Help & Info Help</h5>
-                  <ul class="menu-list list-unstyled">
-                    <li class="menu-item mb-1">
-                      <a href="#">Track Your Order</a>
-                    </li>
-                    <li class="menu-item mb-1">
-                      <a href="#">Returns Policies</a>
-                    </li>
-                    <li class="menu-item mb-1">
-                      <a href="#">Shipping + Delivery</a>
-                    </li>
-                    <li class="menu-item mb-1">
-                      <a href="#">Contact Us</a>
-                    </li>
-                    <li class="menu-item mb-1">
-                      <a href="#">Faqs</a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              <div class="col-lg-3 col-sm-6 pb-3">
-                <div class="footer-menu contact-item">
-                  <h5 class="widget-title text-capitalize pb-2">Contact Us</h5>
-                  <p>Do you have any queries or suggestions? <a href="mailto:"
-                      class="text-decoration-underline">yourinfo@gmail.com</a></p>
-                  <p>If you need support? Just give us a call. <a href="#" class="text-decoration-underline">+55 111 222
-                      333 44</a></p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </footer>
-    <hr>
-    <div id="footer-bottom" class="mb-2">
-      <div class="container">
-        <div class="d-flex flex-wrap justify-content-between">
-          <div class="ship-and-payment d-flex gap-md-5 flex-wrap">
-            <div class="shipping d-flex">
-              <p>We ship with:</p>
-              <div class="card-wrap ps-2">
-                <img src="images/dhl.png" alt="visa">
-                <img src="images/shippingcard.png" alt="mastercard">
-              </div>
-            </div>
-            <div class="payment-method d-flex">
-              <p>Payment options:</p>
-              <div class="card-wrap ps-2">
-                <img src="images/visa.jpg" alt="visa">
-                <img src="images/mastercard.jpg" alt="mastercard">
-                <img src="images/paypal.jpg" alt="paypal">
-              </div>
-            </div>
-          </div>
-          <div class="copyright">
-            <p>© Copyright 2024 Bookly. HTML Template by <a href="https://templatesjungle.com/"
-                target="_blank">TemplatesJungle</a>
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
+    <%@ include file="/bootstrap5/footer.jsp" %>
 
     <script src="js/jquery-1.11.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-      crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
     <script type="text/javascript" src="js/script.js"></script>
+    <script>
+ 	// Hàm cập nhật phí vận chuyển
+    function updateShippingFee(fee) {
+        const shippingFeeElement = document.querySelector('.shipping-fee bdi');
+        const shippingFeeInput = document.getElementById('shippingFee');  // Lấy trường ẩn shippingFee
+        if (shippingFeeElement && shippingFeeInput) {
+            // Cập nhật phí vận chuyển trên giao diện
+            shippingFeeElement.textContent = fee.toLocaleString('vi-VN').replace(/\./g, ',');
+
+            // Cập nhật giá trị vào trường ẩn shippingFee
+            shippingFeeInput.value = fee;
+        } else {
+            console.error('Không tìm thấy phần tử phí vận chuyển hoặc trường ẩn shippingFee');
+        }
+    }
+
+    // Hàm cập nhật tổng thanh toán
+    function updateTotalPayment() {
+        // Lấy thành tiền sản phẩm
+        const productTotalElement = document.querySelector('.subtotal .price-amount bdi');
+        const productTotal = productTotalElement ? parseFloat(productTotalElement.textContent.replace(/,/g, '')) : 0;
+
+        // Lấy phí vận chuyển
+        const shippingFeeElement = document.querySelector('.shipping-fee bdi');
+        const shippingFee = shippingFeeElement ? parseFloat(shippingFeeElement.textContent.replace(/,/g, '')) : 0;
+
+        // Tính tổng thanh toán
+        const totalPayment = productTotal + shippingFee;
+
+        // Cập nhật tổng thanh toán vào giao diện
+        const totalPaymentElement = document.querySelector('.total .price-amount bdi'); // Đảm bảo cập nhật đúng phần tử
+        if (totalPaymentElement) {
+            totalPaymentElement.textContent = totalPayment.toLocaleString('vi-VN').replace(/\./g, ',');
+        } else {
+            console.error('Không tìm thấy phần tử tổng thanh toán');
+        }
+    }
+
+    // Lắng nghe sự kiện thay đổi phương thức vận chuyển
+    document.querySelectorAll('input[name="shippingMethod"]').forEach((radio) => {
+        radio.addEventListener('change', function() {
+            const shippingMethodId = this.value;  // Lấy giá trị của phương thức vận chuyển đã chọn
+
+            // Gửi yêu cầu đến controller để lấy phí vận chuyển
+            fetch(`${pageContext.request.contextPath}/User/Shipprice`, {
+                method: 'POST',
+                body: JSON.stringify({ shippingMethod: shippingMethodId }),  // Gửi dữ liệu phương thức vận chuyển
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Dữ liệu từ server:', data);  // Kiểm tra dữ liệu trả về từ server
+
+                // Cập nhật phí vận chuyển
+                updateShippingFee(data.fee);
+
+                // Cập nhật tổng thanh toán sau khi thay đổi phí vận chuyển
+                updateTotalPayment();
+            })
+            .catch(error => {
+                console.error('Lỗi khi lấy phí vận chuyển:', error);
+            });
+        });
+    });
+	</script>
   </body>
 </html>

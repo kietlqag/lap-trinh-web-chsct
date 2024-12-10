@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 
 import Configs.DBConnect;
 import Models.Account;
+import Models.User;
 
 @SuppressWarnings("serial")
 public class AccountDaoImp extends DBConnect implements IAccountDao {
@@ -118,5 +119,35 @@ public class AccountDaoImp extends DBConnect implements IAccountDao {
 	        e.printStackTrace();
 	    }
 	    return false;   
+	}
+
+	@Override
+	public User getUserByUsername(String username) {
+		String sql = "SELECT * FROM user WHERE username = ?";
+		User user = null;
+		try {
+			conn = super.getConnection();
+
+			ps = conn.prepareStatement(sql);
+
+			ps.setString(1, username);
+
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				user = new User();
+				user.setUsername(rs.getString("username"));
+				user.setFullname(rs.getString("fullname"));
+				user.setPhone(rs.getString("phone"));
+				user.setProvince(rs.getString("province"));
+				user.setDistrict(rs.getString("district"));
+				user.setAddress(rs.getString("address"));
+				
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return user;
 	}
 }
